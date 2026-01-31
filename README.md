@@ -1,11 +1,6 @@
 
 # Porter-Delivery-Analytics
 
-<div align="center">
-   
-
-
-<img src="porter.jpg" alt="drawing" width="500"/>
 
 </div>
 
