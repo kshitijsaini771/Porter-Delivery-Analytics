@@ -1,92 +1,51 @@
-
 # Porter-Delivery-Analytics
+## Overview
 
+This project investigates the drop in customer satisfaction experienced by Porter Delivery across its key markets. By analyzing delivery performance data, the goal is to identify the underlying reasons behind late deliveries and offer actionable, data-backed solutions to enhance on-time service and overall customer experience—ultimately supporting the company’s efforts to restore its market competitiveness.
 
-</div>
+---
 
-## **Overview**
+## Dataset
 
-This project analyzes **Porter Delivery**'s declining customer satisfaction in key markets. By examining delivery data, I aim to pinpoint the root causes of delayed deliveries and provide data-driven recommendations to improve service times and customer experience, helping the company regain its competitive edge.
+The analysis leverages Porter Delivery’s operational data, structured across three interconnected tables within a single Excel workbook. The primary dataset resides in the **Orders** sheet, which captures comprehensive details for each delivery—including logistics information like `Ship Date` and `Ship Mode` (e.g., Same Day, First Class), customer and geographic data such as `Customer ID`, `City`, `State`, and `Region`, product attributes like `Category`, `Sub-Category`, and `Product Name`, and financial metrics including `Sales`, `Quantity`, `Discount`, and `Profit`. Complementing this is the **Returns** sheet, which logs returned orders using `Order ID` (linked to the Orders table) and a `Returned` flag (Yes/No), serving as a direct proxy for customer dissatisfaction. Lastly, the **People** sheet functions as a reference table, mapping regional managers (`Person`) to their respective `Region`. By merging these tables—particularly through shared keys like `Order ID` and `Region`—the analysis can uncover how delivery performance, customer segments, product types, and return patterns collectively contribute to the observed decline in customer satisfaction.
 
-<!--![Porter](https://raw.githubusercontent.com/PratyushPuri/Porter-Delivery-Analytics/refs/heads/main/Porter%20Dash.png)-->
+[Link for Dataset](https://www.kaggle.com/datasets/ranitsarkar01/porter-delivery-time-estimation)
 
-## **Dataset**
-
-The analysis uses the operational data of Porter Delivery. It is contained within a single Excel workbook that has three linked tables.
-
-`Link for Dataset is` [porter-delivery-time-estimation](https://www.kaggle.com/datasets/ranitsarkar01/porter-delivery-time-estimation)
-
-**1. Orders (`Orders` Sheet)**  
-This is the main table with all delivery order details. Key columns include:  
-*   **Logistics:** `Ship Date`, `Ship Mode` (e.g., Same Day, First Class).  
-*   **Customer & Location:** `Customer ID/Name`, `Segment`, `City`, `State`, `Region`.  
-*   **Product Details:** `Product ID`, `Category`, `Sub-Category`, `Product Name`.  
-*   **Financials:** `Sales`, `Quantity`, `Discount`, `Profit`.  
-
-**2. Returns (`Returns` Sheet)**  
-This table tracks order returns. It is an important indicator of customer dissatisfaction.  
-*   **Core Columns:** `Order ID` (which matches the `Orders` table) and `Returned` (Yes/No flag).  
-
-**3. People (`People` Sheet)**  
-This is a basic lookup table for regional managers.  
-*   **Core Columns:** `Person` (Manager Name) and `Region`.  
-
-By joining these tables (for example, linking `Order ID` and `Region`), the analysis can explore the relationship between delivery performance (`Ship Mode`, timeliness), customer profiles, product categories, and return rates to find reasons for declining satisfaction.
+---
 
 ## Analysis
 
-> Solution File for Analytics is `Porter - Solution.xlsx`
+To understand the reasons behind Porter Delivery’s falling customer satisfaction, I conducted a structured two-phase analysis of the order dataset.
 
-To diagnose the decline in Porter Delivery's satisfaction, I carried out a two-phase analysis on the order data.
+- **Data Cleaning:** Handled missing entries in critical columns such as `actual_delivery_time`, `store_primary_category`, and partner-related fields like `total_onshift_partners`.  
+- **Data Type Conversion:** Converted timestamp fields—`created_at` and `actual_delivery_time`—from text strings into proper **datetime format** to enable accurate time-based computations.  
+- **Feature Creation:** Derived new analytical variables, including **delivery duration**, and extracted temporal features such as **hour of order placement** and **day of the week**.
+- **Demand Pattern Identification:** Pinpointed **peak ordering hours** and **busiest days of the week** to evaluate pressure points in the delivery infrastructure.  
+- **Service Performance Metrics:** Measured the **proportion of orders completed within 30 minutes** and examined the **distribution of delivery durations**, revealing notable outliers and delays.  
+- **Root Cause Exploration:**  
+  - Compared **average delivery times across store categories** and flagged the **five stores with the slowest performance**.  
+  - Assessed the **relationship between order volume and the count of active (busy) delivery partners** to gauge staffing efficiency.  
+  - Investigated how **delivery speed varies by day of the week** to uncover consistent weekly operational bottlenecks.
 
-**Phase 1: Data Preparation and Quality Check**  
-*   **Cleaning:** I addressed missing values in key fields like `actual_delivery_time`, `store_primary_category`, and partner metrics (`total_onshift_partners`).  
-*   **Transformation:** I changed `created_at` and `actual_delivery_time` from text to proper **datetime format** to allow for time-based analysis.  
-*   **Feature Engineering:** I created new metrics, including **delivery duration**, and extracted **order hour** and **day of the week** for further analysis.
+This process uncovered specific systemic weaknesses—such as underperforming stores, inefficient resource allocation during rush periods, and category-level delays—laying the groundwork for precise, data-driven operational enhancements.
 
-**Phase 2: Exploratory and Diagnostic Analysis**  
-*   **Operational Bottlenecks:** I identified **peak order hours** and **high-volume days of the week** to assess stress on delivery networks.  
-*   **Performance Analysis:** I calculated the **percentage of orders delivered within 30 minutes** and looked at the **distribution of delivery times**, finding significant outliers.  
-*   **Root Cause Investigation:**  
-    *   I compared **average delivery times across different store categories** and identified the **top 5 stores with the longest delays**.  
-    *   I analyzed the **correlation between order volumes and the number of busy delivery partners** to evaluate resource use.  
-    *   I looked into the **impact of the day of the week on average delivery time** to find recurring weekly bottlenecks.
+---
 
-This analysis highlighted critical issues in the delivery system, from specific slow stores and categories to understaffed peak times, providing a clear plan for targeted operational improvements.
+## Dashboard
 
-## **Dashboard Summary**
+**⚠️ IMPORTANT: To use this dashboard, open the file `Solution.xlsx` and navigate to the “Dashboard” sheet. All interactive elements function only within this tab.**
 
-This dashboard offers an overview of Porter Delivery's main performance metrics.
+- This dashboard provides a strategic overview of Porter Delivery’s operational performance across key metrics.
+- Highlights include total orders (1,97,421), revenue (₹52.95 Cr), average delivery time (48.47 mins), and partner utilization (93.15%).
+- Visuals track daily order volume, category-wise performance, market distribution by ID, and revenue trends over time.
+- Interactive date slicers let users drill into specific days (e.g., 21–23 Jan 2015) for granular analysis.
+- Designed for operations and leadership teams to monitor efficiency, identify bottlenecks, and optimize resource allocation.
+- Enables quick identification of high-performing vs. underperforming segments to drive targeted improvements.
+- Supports data-informed decisions to reduce delivery delays and enhance customer satisfaction.
 
-**Key Performance Indicators (KPIs):**
-*   **Scale:** **197,421 total orders** processed, generating **¥52.95 Crores in revenue**.
-*   **Efficiency:** The average delivery time is **48.47 minutes**, a key measure for customer satisfaction.
-*   **Resource Utilization:** The delivery partner **Utilization Rate** is high at **93.15%**, showing nearly full operations.
-
-**Core Visualizations:**
-*   **Daily Order Trend:** A line chart shows the daily volume of orders, helping to spot increases, decreases, and overall demand patterns over time.
-*   **Performance Over Time:** This likely includes a visual tracking the relationship between order volume and key metrics like average delivery time. It highlights changes in performance under different loads.
-*   **Date Filter:** A slicer for **Date** lets users analyze performance for specific days or date ranges.
-
-This dashboard centralizes key data, allowing management to monitor operational health, link busy days with delivery delays, and make informed choices to improve the delivery network.
+---
 
 ![Porter](Potter.PNG)
-
-## **How to Use the Dashboard**
-
-This interactive dashboard is made for easy monitoring of delivery operations and performance.
-
-1. **Open the File:** Start by launching the `Porter - Solution.xlsx` file in Microsoft Excel.
-
-2. **Navigate & Interact:**
-   * **Review KPIs:** First, take a look at the main performance metrics at the top: **Total Orders, Revenue, Average Delivery Time, and Utilization Rate.**
-   * **Apply Time Filters:** Use the **Date slicer** to choose a specific day or range. This will update all charts and KPIs to show performance for that period.
-   * **Analyze Trends:** Look at the **Daily Order Trend** line chart. Hover over data points to see exact order counts for specific dates and notice patterns like weekly peaks.
-
-3. **Refresh Data (If Applicable):**
-   * If the workbook is linked to a live operations database, update the dashboard by going to the **Data** tab and clicking **"Refresh All."**
-   * **Security Note:** If asked to enable macros or external content, choose "Enable" only if you are sure about the file's source and security.
-
 
 ## Author & Contact
 - Name: `Kshitij Saini`
