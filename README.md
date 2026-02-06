@@ -1,14 +1,14 @@
 # Porter Delivery Analytics Dashboard
 
 ## Problem Statement
-Porter Delivery has experienced a **decline in customer satisfaction**, largely linked to delays and inconsistent delivery performance. This project analyzes Porter’s delivery data to uncover the **drivers of late deliveries**, identify **operational bottlenecks**, and provide **actionable recommendations** to improve on-time performance, partner utilization, and overall customer experience [web:16][web:20][web:23].
+Porter Delivery has experienced a **decline in customer satisfaction**, largely linked to delays and inconsistent delivery performance. This project analyzes Porter’s delivery data to uncover the **drivers of late deliveries**, identify **operational bottlenecks**, and provide **actionable recommendations** to improve on-time performance, partner utilization, and overall customer experience .
 
 ---
 
 ## Analysis Done
-- Consolidated and explored Porter Delivery’s operational dataset, focusing on order timestamps, restaurant categories, and delivery partner availability [web:16][web:23].
-- Performed **data cleaning**, addressing missing values in `actual_delivery_time`, `store_primary_category`, and partner-related fields such as `total_onshift_partners` and `total_busy_partners` [web:20][web:23].
-- Converted `created_at` and `actual_delivery_time` to **datetime**, enabling accurate **delivery duration** calculations and time-based analysis (hour, weekday) [web:20][web:23].
+- Consolidated and explored Porter Delivery’s operational dataset, focusing on order timestamps, restaurant categories, and delivery partner availability.
+- Performed **data cleaning**, addressing missing values in `actual_delivery_time`, `store_primary_category`, and partner-related fields such as `total_onshift_partners` and `total_busy_partners` .
+- Converted `created_at` and `actual_delivery_time` to **datetime**, enabling accurate **delivery duration** calculations and time-based analysis (hour, weekday) .
 - Engineered features for:
   - Delivery duration in minutes.
   - Peak ordering windows (hour of day, day of week).
